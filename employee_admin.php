@@ -133,11 +133,6 @@ session_start();
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
                                 aria-labelledby="userDropdown">
-                                <a class="dropdown-item" href="#">
-                                    <i class="fas fa-user-gear fa-sm fa-fw mr-2 text-gray-400"></i>
-                                    ตั้งค่าบัญชี
-                                </a>
-                                <div class="dropdown-divider" ></div>
                                 <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal" >
                                     <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
                                     Logout
@@ -169,7 +164,6 @@ session_start();
                                     class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
                                     <h6 class="m-0 font-weight-bold text-primary">
                                     </h6>
-                                    <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-900"></i>
                                     <a href="employee_admin_insert.php" class="btn btn-success btn-icon-split">
                                         <span class="icon text-white-50">
                                             <i class="fas fa-plus"></i>
@@ -214,7 +208,7 @@ session_start();
                                                     </a>
                                                 </td>
                                                 <td style="text-align: center;">
-                                                    <a href="employee_admin_edit_delete.php?delete_id=<?php echo $row['emp_id'] ?>" name="delete" class="btn btn-danger btn-circle" data-toggle="modal" data-target="#deleteempModal">
+                                                    <a href="employee_admin_edit_delete.php?delete_id=<?php echo $row['emp_id'] ?>" name="delete" class="btn btn-danger btn-circle">
                                                         <i class="fas fa-trash"></i>
                                                     </a>
                                                 </td>
@@ -269,26 +263,6 @@ session_start();
                     </button>
                 </div>
                 <div class="modal-body">ต้องการจะ Logout ใช่ไหม?</div>
-                <div class="modal-footer">
-                    <button class="btn btn-secondary" type="button" data-dismiss="modal">ยกเลิก</button>
-                    <a class="btn btn-danger" href="logout.php" name="logout" >ตกลง</a>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Delete employee Modal-->
-    <div class="modal fade" id="deleteempModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-        aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">ลบรายการ</h5>
-                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">×</span>
-                    </button>
-                </div>
-                <div class="modal-body">ต้องการจะลบรายการใช่ไหม?</div>
                 <div class="modal-footer">
                     <button class="btn btn-secondary" type="button" data-dismiss="modal">ยกเลิก</button>
                     <a class="btn btn-danger" href="logout.php" name="logout" >ตกลง</a>

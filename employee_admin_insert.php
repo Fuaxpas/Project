@@ -2,7 +2,6 @@
 require("connection.php");
 session_start();
 ?>
-
 <?php //* เพิ่มข้อมูลพนักงาน
 if(isset($_POST['submit'])){
     $emp_id = $_POST["emp_id"];
@@ -25,83 +24,300 @@ if(isset($_POST['submit'])){
 ?>
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ข้อมูลพนักงาน</title>
-    <link rel="stylesheet" href="bootstrap/js/bootstrap.min.js">
-    <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
 
-<style>
-    .tcp{
-        color: rgb(255, 169, 169);
-    }
-    .tcg{
-        color: green;
-    }
-    .tcr{
-        color: red;
-    }
-    .tcw{
-        color: white;
-    }
-    body {
-          background-image: url('image/bg2.jpg');
-          background-repeat: no-repeat;
-          background-size: cover;
-        }
-    .card { background-color: rgba(245, 245, 245, 0.4); }
-    .card-header, .card-footer { opacity: 1}
-</style>
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>ป้อฮ์ไอติมกะทิสด</title>
+
+    <!-- Custom fonts for this template-->
+    <link href="vendor/fontawesome-free-6.0.0-web/css/all.min.css" rel="stylesheet" type="text/css">
+    <link
+        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+        rel="stylesheet">
+
+    <!-- Custom styles for this template-->
+    <link href="css/sb-admin-2.min.css" rel="stylesheet">
 
 </head>
-<body style="background-color: rgb(255, 254, 179);">
-    <form action="employee_admin_insert.php" method="post" name="myForm">
-    <div class="d-flex justify-content-center align-items-center text-dark" style="background-color: rgb(59, 59, 59);">
-        <img src="image/224019868_4188885927869080_8971062786250497666_n.jpg" class="rounded-circle" style="width: 160px; ">
-    </div>
 
-    <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
-        <div class="container-fluid">
-            <div style = "color:white; padding-left: 75%"><b>ผู้ใช้งาน:<?=$_SESSION['emp_name'],' ',$_SESSION['emp_sname']?></b></div>
-            <div style = "color:white;"><b>ตำแหน่ง:<?=$_SESSION['position']?></b></div>
-            <div><a class="navbar-brand" href="logout.php" name="logout"><b class="tcr">Log out</b></a></div>
-        </div>
-    </nav>
- 
-    <div class="container" style="margin-top: 20px;">
-        <div class="card" style="width: 1000px; margin: auto;">
-            <h1>เพิ่มข้อมูลพนักงาน</h1>
-            <div class="row card-body">
-                <div class="col-md-4">
-                    <h2>ไอดีผู้ใช้</h2><br>
-                    <h2>รหัสผ่าน</h2><br>
-                    <h2>ชื่อ</h2><br>
-                    <h2>นามสกุล</h2><br>
-                    <h2>วันเกิด</h2><br>
-                    <h2>เบอร์โทรศัพท์</h2><br>
-                    <h2>คุณสมบัติ</h2><br>
-                    <h2>ตำแหน่ง</h2><br>
+<body id="page-top">
+
+    <!-- Page Wrapper -->
+    <div id="wrapper">
+
+        <!-- Sidebar -->
+        <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+
+            <!-- Sidebar - Brand -->
+            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index_admin.php">
+                <div >
+                    <i><img style="border-radius: 50%; width: 50px; " src="image/224019868_4188885927869080_8971062786250497666_n.jpg" ></i>
                 </div>
+                <div class="sidebar-brand-text mx-1">ป้อฮ์ไอติมกะทิสด</div>
+            </a>
 
-                <div class="col-md-8">
-                    <input type="text" id="emp_id" name="emp_id" class="form-control form-control-lg" style="width: 100%;" placeholder="ชื่อผู้ใช้" ><br>
-                    <input type="text" id="emp_psw" name="emp_psw" class="form-control form-control-lg" style="width: 100%;" placeholder="รหัสผ่าน"><br>
-                    <input type="text" id="emp_name" name="emp_name" class="form-control form-control-lg" style="width: 100%;" placeholder="ชื่อ"><br>
-                    <input type="text" id="emp_sname" name="emp_sname" class="form-control form-control-lg" style="width: 100%;" placeholder="นามสกุล"><br>
-                    <input type="date" id="emp_birth" name="emp_birth" class="form-control form-control-lg" style="width: 100%;" ><br>
-                    <input type="text" id="emp_phone" name="emp_phone" class="form-control form-control-lg" style="width: 100%;" placeholder="เบอร์โทรศัพท์"><br>
-                    <input type="text" id="qualification" name="qualification" class="form-control form-control-lg" style="width: 100%;" placeholder="คุณสมบัติ"><br>
-                    <select class="form-control form-control-lg" style="width: 100%;" id="position" name="position">
-                        <option selected value="">ตำแหน่ง</option>
-                        <option value="admin">admin</option>
-                        <option value="driver">driver</option>
-                        <option value="employee">employee</option>
-                    </select><br>
-                    <button type="submit" name="submit" class="btn-lg btn-success">เพิ่มข้อมูล</button>
+            <!-- Divider -->
+            <hr class="sidebar-divider">
+
+            <!-- Nav Item - Pages Collapse Menu -->
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="employee_admin.php">
+                    <i class="fa-solid fa-user"></i>
+                    <span><b>ข้อมูลพนักงาน</b></span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#">
+                    <i class="fa-solid fa-ice-cream"></i>
+                    <span><b>ข้อมูลสินค้า</b></span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#">
+                    <i class="fa-solid fa-ice-cream"></i>
+                    <span><b>ข้อมูลประเภทสินค้า</b></span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#">
+                    <i class="fa-solid fa-truck"></i>
+                    <span><b>ข้อมูลรถส่งสินค้า</b></span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#">
+                    <i class="fa-solid fa-store"></i>
+                    <span><b>ข้อมูลร้านค้า</b></span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#">
+                    <i class="fa-solid fa-battery-full"></i>
+                    <span><b>ข้อมูลสินค้านำเข้ารถไอศกรีม</b></span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#">
+                    <i class="fa-solid fa-battery-empty"></i>
+                    <span><b>ข้อมูลสินค้านำออกรถไอศกรีม</b></span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#">
+                    <i class="fa-solid fa-truck-fast"></i>
+                    <span><b>ข้อมูลการส่งสินค้า</b></span>
+                </a>
+            </li>
+            
+            <!-- Divider -->
+            <hr class="sidebar-divider d-none d-md-block">
+
+            <!-- Sidebar Toggler (Sidebar) -->
+            <div class="text-center d-none d-md-inline">
+                <button class="rounded-circle border-0" id="sidebarToggle"></button>
+            </div>
+        </ul>
+        <!-- End of Sidebar -->
+
+        <!-- Content Wrapper -->
+        <div id="content-wrapper" class="d-flex flex-column">
+
+            <!-- Main Content -->
+            <div id="content">
+
+                <!-- Topbar -->
+                <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+
+                    <!-- Sidebar Toggle (Topbar) -->
+                    <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
+                        <i class="fa fa-bars"></i>
+                    </button>
+                    
+                    <!-- Topbar Navbar -->
+                    <ul class="navbar-nav ml-auto">
+                        
+                        <!-- Nav Item - User Information -->
+                        <li class="nav-item dropdown no-arrow">
+                            <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <span class="mr-2 d-none d-lg-inline text-gray-600 small"><?=$_SESSION['emp_name'],' ',$_SESSION['emp_sname']?></span>
+                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">ตำแหน่ง: <?=$_SESSION['position']?></span>
+                                <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
+                            </a>
+                            <!-- Dropdown - User Information -->
+                            <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
+                                aria-labelledby="userDropdown">
+                                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal" >
+                                    <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                                    Logout
+                                </a>
+                            </div>
+                        </li>
+
+                    </ul>
+
+                </nav>
+                <!-- End of Topbar -->
+
+                <!-- Begin Page Content -->
+                <div class="container-fluid">
+
+                    <!-- Page Heading -->
+                    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                        <h1 class="h3 mb-0 text-gray-800">เพิ่มข้อมูลพนักงาน</h1>
                     </div>
+
+                    <div class="container">
+                        <div class="card o-hidden border-0 shadow-lg my-5">
+                            <div class="card-body p-0">
+                                <!-- Nested Row within Card Body -->
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        <div class="p-5">
+                                            <div class="text-center">
+                                                <h1 class="h4 text-gray-900 mb-4">ข้อมูลพนักงาน</h1>
+                                            </div>
+                                            <form class="user" action="employee_admin_insert.php" method="post" name="myForm">
+                                                <div class="form-group">
+                                                    <input type="text" class="form-control form-control-lg"
+                                                        id="emp_id" name="emp_id" placeholder="ชื่อผู้ใช้">
+                                                </div>
+                                                <div class="form-group">
+                                                    <input type="text" class="form-control form-control-lg"
+                                                        id="emp_psw" name="emp_psw" placeholder="รหัสผ่าน">
+                                                </div>
+                                                <div class="form-group row">
+                                                    <div class="col-sm-6 mb-3 mb-sm-0">
+                                                        <input type="text" class="form-control form-control-lg" 
+                                                        id="emp_name" name="emp_name" placeholder="ชื่อ">
+                                                    </div>
+                                                    <div class="col-sm-6">
+                                                        <input type="text" class="form-control form-control-lg" 
+                                                        id="emp_sname" name="emp_sname" placeholder="นามสกุล">
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <input type="date" class="form-control form-control-lg" id="emp_birth" name="emp_birth">
+                                                </div>
+                                                <div class="form-group">
+                                                    <input type="text" class="form-control form-control-lg"
+                                                    id="emp_phone" name="emp_phone" placeholder="เบอร์โทรศัพท์">
+                                                </div>
+                                                <div class="form-group">
+                                                    <input type="text" class="form-control form-control-lg"
+                                                    id="qualification" name="qualification" placeholder="คุณสมบัติ">
+                                                </div>
+                                                <div class="form-group">
+                                                <select class="form-control form-control-lg" id="position" name="position">
+                                                    <option selected value="">ตำแหน่ง</option>
+                                                    <option value="admin">Admin</option>
+                                                    <option value="driver">Driver</option>
+                                                    <option value="employee">Employee</option>
+                                                </select><br>
+                                                </div>
+                                                <button type="submit" name="submit" class="btn btn-success btn-user btn-block">
+                                                    <i class="fas fa-plus"></i>
+                                                    <b>เพิ่มข้อมูล</b>
+                                                </button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+                <!-- /.container-fluid -->
+
+            </div>
+            <!-- End of Main Content -->
+
+            <!-- Footer -->
+            <footer class="sticky-footer bg-white">
+                <div class="container my-auto">
+                    <div class="copyright text-center my-auto">
+                        <span>Copyright &copy; ป้อฮ์ไอติมกะทิสด 2022</span>
+                    </div>
+                </div>
+            </footer>
+            <!-- End of Footer -->
+
+        </div>
+        <!-- End of Content Wrapper -->
+
+    </div>
+    <!-- End of Page Wrapper -->
+
+    <!-- Scroll to Top Button-->
+    <a class="scroll-to-top rounded" href="#page-top">
+        <i class="fas fa-angle-up"></i>
+    </a>
+
+    <!-- Logout Modal-->
+    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Logout</h5>
+                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">ต้องการจะ Logout ใช่ไหม?</div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" type="button" data-dismiss="modal">ยกเลิก</button>
+                    <a class="btn btn-danger" href="logout.php" name="logout" >ตกลง</a>
+                </div>
+            </div>
         </div>
     </div>
-    </form>
+
+    <!-- Delete employee Modal-->
+    <div class="modal fade" id="deleteempModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">ลบรายการ</h5>
+                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">ต้องการจะลบรายการใช่ไหม?</div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" type="button" data-dismiss="modal">ยกเลิก</button>
+                    <a class="btn btn-danger" href="logout.php" name="logout" >ตกลง</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap core JavaScript-->
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Core plugin JavaScript-->
+    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+
+    <!-- Custom scripts for all pages-->
+    <script src="js/sb-admin-2.min.js"></script>
+
+    <!-- Page level plugins -->
+    <script src="vendor/chart.js/Chart.min.js"></script>
+
+    <!-- Page level custom scripts -->
+    <script src="js/demo/chart-area-demo.js"></script>
+    <script src="js/demo/chart-pie-demo.js"></script>
+
 </body>
+
 </html>
