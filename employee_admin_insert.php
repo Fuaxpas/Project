@@ -85,7 +85,7 @@ if(isset($_POST['submit'])){
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link collapsed" href="#">
+                <a class="nav-link collapsed" href="truck_admin.php">
                     <i class="fa-solid fa-truck"></i>
                     <span><b>ข้อมูลรถส่งสินค้า</b></span>
                 </a>
