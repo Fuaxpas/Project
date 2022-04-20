@@ -2,6 +2,23 @@
 require("connection.php");
 session_start();
 ?>
+<?php //* เพิ่มข้อมูลพนักงาน
+if(isset($_POST['submit'])){
+    $truck_id = $_POST["truck_id"];
+    $truck_detail = $_POST["truck_detail"];
+    $truck_route = $_POST["truck_route"];
+    $emp_id = $_POST["emp_id"];
+    $sql1 = "INSERT INTO truck(truck_id,truck_detail,truck_route,emp_id)
+    VALUES ('$truck_id','$truck_detail','$truck_route','$emp_id')";
+    if(mysqli_query($conn,$sql1)){
+        header("location:truck_admin.php");
+    }
+    else{
+        echo "ผิดพลาด!!";
+        echo "$emp_id";
+    }
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -150,78 +167,54 @@ session_start();
 
                     <!-- Page Heading -->
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                        <h1 class="h3 mb-0 text-gray-800">ข้อมูลพนักงาน</h1>
+                        <h1 class="h3 mb-0 text-gray-800">เพิ่มข้อมูลรถส่งสินค้า</h1>
                     </div>
 
-                    <!-- Content Row -->
-                    <div class="row">
-
-                        <!-- Area Chart -->
-                        <div class="col-xl-10 col-lg-7">
-                            <div class="card shadow mb-4">
-                                <!-- Card Header - Dropdown -->
-                                <div
-                                    class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                                    <h6 class="m-0 font-weight-bold text-primary">
-                                    </h6>
-                                    <a href="employee_admin_insert.php" class="btn btn-success btn-icon-split">
-                                        <span class="icon text-white-50">
-                                            <i class="fas fa-plus"></i>
-                                        </span>
-                                        <span class="text">เพิ่ม</span>
-                                    </a>
-                                </div>
-                                <!-- Card Body -->
-                                <div class="card-body" style="overflow-x: scroll;">
-                                    <div class="chart-area">
-                                    <table class="table table-striped table-lg" id="table" style="margin: auto;">
-                                    <tbody>
-                                        <tr>
-                                        <td class="table-dark" style="text-align: center;"><b>ไอดีผู้ใช้</b></td>
-                                        <td class="table-dark" style="text-align: center;"><b>รหัสผ่าน</b></td>
-                                        <td class="table-dark" style="text-align: center;"><b>ชื่อ</b></td>
-                                        <td class="table-dark" style="text-align: center;"><b>นามสกุล</b></td>
-                                        <td class="table-dark" style="text-align: center;"><b>วันเกิด</b></td>
-                                        <td class="table-dark" style="text-align: center;"><b>เบอร์โทรศัพท์</b></td>
-                                        <td class="table-dark" style="text-align: center;"><b>คุณสมบัติ</b></td>
-                                        <td class="table-dark" style="text-align: center;"><b>ตำแหน่ง</b></td>
-                                        <td class="table-dark" style="text-align: center;"><b>แก้ไข</b></td>
-                                        <td class="table-dark" style="text-align: center;"><b>ลบ</b></td>
-                                        <tr></tr>
-                                            <?php
-                                            $sql2 = "SELECT * FROM employee";
-                                            $result = mysqli_query($conn,$sql2);
-                                            while ($row = mysqli_fetch_assoc($result)){
-                                            ?>
-                                                
-                                                <td><?php echo $row['emp_id']?></td>
-                                                <td><?php echo $row['emp_psw']?></td>
-                                                <td><?php echo $row['emp_name']?></td>
-                                                <td><?php echo $row['emp_sname']?></td>
-                                                <td><?php echo $row['emp_birth']?></td>
-                                                <td><?php echo $row['emp_phone']?></td>
-                                                <td><?php echo $row['qualification']?></td>
-                                                <td><?php echo $row['position']?></td>
-                                                <td style="text-align: center;">
-                                                    <a href="employee_admin_edit.php?update_id=<?php echo $row['emp_id']?> " class="btn btn-warning btn-circle">
-                                                        <i class="fas fa-gear"></i>
-                                                    </a>
-                                                </td>
-                                                <td style="text-align: center;">
-                                                    <a href="employee_admin_edit_delete.php?delete_id=<?php echo $row['emp_id'] ?>" name="delete" class="btn btn-danger btn-circle">
-                                                        <i class="fas fa-trash"></i>
-                                                    </a>
-                                                </td>
-                                        </tr>
-                                        <?php
-                                            }
-                                        ?>
-                                    </tbody>
-                                    </table>
+                    <div class="container">
+                        <div class="card o-hidden border-0 shadow-lg my-5">
+                            <div class="card-body p-0">
+                                <!-- Nested Row within Card Body -->
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        <div class="p-5">
+                                            <div class="text-center">
+                                                <h1 class="h4 text-gray-900 mb-4">ข้อมูลรถส่งสินค้า</h1>
+                                            </div>
+                                            <form class="user" action="truck_admin_insert.php" method="post" name="myForm">
+                                                <div class="form-group">
+                                                    <input type="text" class="form-control form-control-lg"
+                                                        id="truck_id" name="truck_id" placeholder="ป้ายทะเบียนรถ">
+                                                </div>
+                                                <div class="form-group">
+                                                    <textarea class="form-control form-control-lg"
+                                                        id="truck_detail" name="truck_detail" placeholder="รายละเอียดรถ" style="resize: none; height: 130px;"></textarea>
+                                                </div>
+                                                <div class="form-group">
+                                                    <textarea class="form-control form-control-lg"
+                                                        id="truck_route" name="truck_route" placeholder="เส้นทางที่รถวิ่ง" style="resize: none; height: 130px;"></textarea>
+                                                </div>
+                                                <div class="form-group">
+                                                <?php
+                                                    $sql2 = "SELECT * FROM employee WHERE position = 'driver'";
+                                                    $result = mysqli_query($conn,$sql2);
+                                                    echo "<select name='emp_id' id='emp_id' class='browser-default custom-select'>";
+                                                    while($arr2 = mysqli_fetch_array($result)){
+                                                        echo "<option value='".$arr2['emp_id']."'>".$arr2['emp_name'],' ', $arr2['emp_sname']."</option>";
+                                                    }
+                                                    echo "</select>"."<br><br>";
+                                                ?>
+                                                </div>
+                                                <button type="submit" name="submit" class="btn btn-success btn-user btn-block">
+                                                    <i class="fas fa-plus"></i>
+                                                    <b>เพิ่มข้อมูล</b>
+                                                </button>
+                                            </form>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
+
                     </div>
 
                 </div>
@@ -263,6 +256,26 @@ session_start();
                     </button>
                 </div>
                 <div class="modal-body">ต้องการจะ Logout ใช่ไหม?</div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" type="button" data-dismiss="modal">ยกเลิก</button>
+                    <a class="btn btn-danger" href="logout.php" name="logout" >ตกลง</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Delete employee Modal-->
+    <div class="modal fade" id="deleteempModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">ลบรายการ</h5>
+                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">ต้องการจะลบรายการใช่ไหม?</div>
                 <div class="modal-footer">
                     <button class="btn btn-secondary" type="button" data-dismiss="modal">ยกเลิก</button>
                     <a class="btn btn-danger" href="logout.php" name="logout" >ตกลง</a>

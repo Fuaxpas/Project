@@ -65,7 +65,7 @@ session_start();
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link collapsed" href="truck_admin.php">
+                <a class="nav-link collapsed" href="#">
                     <i class="fa-solid fa-truck"></i>
                     <span><b>ข้อมูลรถส่งสินค้า</b></span>
                 </a>
@@ -150,7 +150,7 @@ session_start();
 
                     <!-- Page Heading -->
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                        <h1 class="h3 mb-0 text-gray-800">ข้อมูลพนักงาน</h1>
+                        <h1 class="h3 mb-0 text-gray-800">ข้อมูลรถส่งสินค้า</h1>
                     </div>
 
                     <!-- Content Row -->
@@ -164,7 +164,7 @@ session_start();
                                     class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
                                     <h6 class="m-0 font-weight-bold text-primary">
                                     </h6>
-                                    <a href="employee_admin_insert.php" class="btn btn-success btn-icon-split">
+                                    <a href="truck_admin_insert.php" class="btn btn-success btn-icon-split">
                                         <span class="icon text-white-50">
                                             <i class="fas fa-plus"></i>
                                         </span>
@@ -177,38 +177,30 @@ session_start();
                                     <table class="table table-striped table-lg" id="table" style="margin: auto;">
                                     <tbody>
                                         <tr>
-                                        <td class="table-dark" style="text-align: center;"><b>ไอดีผู้ใช้</b></td>
-                                        <td class="table-dark" style="text-align: center;"><b>รหัสผ่าน</b></td>
-                                        <td class="table-dark" style="text-align: center;"><b>ชื่อ</b></td>
-                                        <td class="table-dark" style="text-align: center;"><b>นามสกุล</b></td>
-                                        <td class="table-dark" style="text-align: center;"><b>วันเกิด</b></td>
-                                        <td class="table-dark" style="text-align: center;"><b>เบอร์โทรศัพท์</b></td>
-                                        <td class="table-dark" style="text-align: center;"><b>คุณสมบัติ</b></td>
-                                        <td class="table-dark" style="text-align: center;"><b>ตำแหน่ง</b></td>
+                                        <td class="table-dark" style="text-align: center;"><b>ป้ายทะเบียน</b></td>
+                                        <td class="table-dark" style="text-align: center;"><b>รายละเอียดรถ</b></td>
+                                        <td class="table-dark" style="text-align: center;"><b>เส้นทางรถ</b></td>
+                                        <td class="table-dark" style="text-align: center;"><b>พนักงานขับรถ</b></td>
                                         <td class="table-dark" style="text-align: center;"><b>แก้ไข</b></td>
                                         <td class="table-dark" style="text-align: center;"><b>ลบ</b></td>
                                         <tr></tr>
                                             <?php
-                                            $sql2 = "SELECT * FROM employee";
+                                            $sql2 = "SELECT * FROM employee emp,truck t WHERE emp.emp_id = t.emp_id";
                                             $result = mysqli_query($conn,$sql2);
                                             while ($row = mysqli_fetch_assoc($result)){
                                             ?>
                                                 
-                                                <td><?php echo $row['emp_id']?></td>
-                                                <td><?php echo $row['emp_psw']?></td>
-                                                <td><?php echo $row['emp_name']?></td>
-                                                <td><?php echo $row['emp_sname']?></td>
-                                                <td><?php echo $row['emp_birth']?></td>
-                                                <td><?php echo $row['emp_phone']?></td>
-                                                <td><?php echo $row['qualification']?></td>
-                                                <td><?php echo $row['position']?></td>
+                                                <td><?php echo $row['truck_id']?></td>
+                                                <td><?php echo $row['truck_detail']?></td>
+                                                <td><?php echo $row['truck_route']?></td>
+                                                <td style="text-align: center;"><?php echo $row['emp_name'];echo '  ';echo $row['emp_sname'] ?></td>
                                                 <td style="text-align: center;">
-                                                    <a href="employee_admin_edit.php?update_id=<?php echo $row['emp_id']?> " class="btn btn-warning btn-circle">
+                                                    <a href="truck_admin_edit.php?update_id=<?php echo $row['truck_id']?> " class="btn btn-warning btn-circle">
                                                         <i class="fas fa-gear"></i>
                                                     </a>
                                                 </td>
                                                 <td style="text-align: center;">
-                                                    <a href="employee_admin_edit_delete.php?delete_id=<?php echo $row['emp_id'] ?>" name="delete" class="btn btn-danger btn-circle">
+                                                    <a href="truck_admin_edit_delete.php?delete_id=<?php echo $row['truck_id'] ?>" name="delete" class="btn btn-danger btn-circle">
                                                         <i class="fas fa-trash"></i>
                                                     </a>
                                                 </td>
