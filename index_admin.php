@@ -71,7 +71,7 @@ session_start();
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link collapsed" href="#">
+                <a class="nav-link collapsed" href="store_admin.php">
                     <i class="fa-solid fa-store"></i>
                     <span><b>ข้อมูลร้านค้า</b></span>
                 </a>
